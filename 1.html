@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор площі кола</title>
+    <link rel="stylesheet" href="1.css"> <!-- Підключення CSS файлу -->
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор площі кола</h1>
+        
+        <div class="input-container">
+            <select id="measurementType" class="styled-select">
+                <option value="radius">Введіть радіус</option>
+                <option value="diameter">Введіть діаметр</option>
+            </select>
+            <input type="number" id="valueField" placeholder="Введіть значення" min="0" class="styled-input">
+        </div>
+
+        <div>
+            <select id="unitType" class="styled-select">
+                <option value="mm">Міліметри</option>
+                <option value="cm">Сантиметри</option>
+                <option value="m">Метри</option>
+            </select>
+        </div>
+
+        <button id="calculateCircleButton" class="animated-button">Розрахувати площу</button>
+        
+        <div id="circleAreaResult" class="result"></div>
+
+        <!-- Блок для формул, центрованих між кнопками -->
+        <div class="formula">
+            <h3>Формули:</h3>
+            <p>За радіусом:</p>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                <mi>S</mi>
+                <mo>=</mo>
+                <mi>&#x3C0;</mi>
+                <msup>
+                    <mi>r</mi>
+                    <mn>2</mn>
+                </msup>
+            </math>
+            <p> За діаметром:</p>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                <mi>S</mi>
+                <mo>=</mo>
+                <mfrac>
+                    <mrow>
+                        <mi>&#x3C0;</mi>
+                        <msup>
+                            <mi>d</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </mrow>
+                    <mn>4</mn>
+                </mfrac>
+            </math>
+        </div>
+        
+        <button onclick="window.history.back()" class="animated-button">Назад</button> <!-- Кнопка повернення на головну сторінку -->
+    </div>
+
+    <script>
+        const measurementType = document.getElementById("measurementType");
+        const valueField = document.getElementById("valueField");
+        const unitType = document.getElementById("unitType");
+        const calculateCircleButton = document.getElementById("calculateCircleButton");
+        const circleAreaResult = document.getElementById("circleAreaResult");
+
+        // Функція для оновлення плейсхолдера
+        function updateInputPlaceholder() {
+            const measureType = measurementType.value;
+            valueField.placeholder = measureType === "radius" ? "Введіть радіус (мм)" : "Введіть діаметр (мм)";
+            valueField.style.opacity = measureType === "radius" ? "1" : "0.5"; // Яскравий або напівпрозорий текст
+        }
+
+        measurementType.addEventListener("change", updateInputPlaceholder);
+        updateInputPlaceholder(); // Ініціалізація при завантаженні сторінки
+
+        calculateCircleButton.addEventListener("click", function() {
+            const value = parseFloat(valueField.value);
+            const measureType = measurementType.value;
+            const unit = unitType.value;
+
+            let area;
+            if (!isNaN(value) && value > 0) {
+                // Площа за радіусом чи діаметром
+                if (measureType === "radius") {
+                    area = Math.PI * Math.pow(value, 2); // Площа за радіусом
+                } else {
+                    area = Math.PI * Math.pow(value / 2, 2); // Площа за діаметром
+                }
+
+                // Конвертація площі в залежності від одиниць
+                switch (unit) {
+                    case "mm":
+                        area = area; // У мм²
+                        break;
+                    case "cm":
+                        area = area / 100; // Перетворення з мм² в см²
+                        break;
+                    case "m":
+                        area = area / 1000000; // Перетворення з мм² в м²
+                        break;
+                    default:
+                        break;
+                }
+
+                circleAreaResult.innerHTML = `Площа кола: ${area.toFixed(6)} ${unit}²`; // Відображення площі з 6 знаками після коми
+                circleAreaResult.classList.add('fade-in'); // Додавання класу анімації
+            } else {
+                circleAreaResult.innerHTML = "Будь ласка, введіть правильне значення.";
+                circleAreaResult.classList.add('fade-in'); // Додавання класу анімації
+            }
+        });
+    </script>
+</body>
+</html>

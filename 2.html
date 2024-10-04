@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор площі прямокутника</title>
+    <link rel="stylesheet" href="2.css"> <!-- Підключення CSS файлу -->
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор площі прямокутника</h1>
+        
+        <div class="input-container">
+            <input type="number" id="lengthField" placeholder="Введіть довжину" min="0" class="styled-input">
+            <select id="lengthUnit" class="styled-select">
+                <option value="mm">Міліметри</option>
+                <option value="cm" selected>Сантиметри</option>
+                <option value="m">Метри</option>
+            </select>
+        </div>
+
+        <div class="input-container">
+            <input type="number" id="widthField" placeholder="Введіть ширину" min="0" class="styled-input">
+            <select id="widthUnit" class="styled-select">
+                <option value="mm">Міліметри</option>
+                <option value="cm" selected>Сантиметри</option>
+                <option value="m">Метри</option>
+            </select>
+        </div>
+
+        <div>
+            <select id="areaUnit" class="styled-select">
+                <option value="mm">Міліметри</option>
+                <option value="cm" selected>Сантиметри</option>
+                <option value="m">Метри</option>
+            </select> <span>²</span>
+        </div>
+
+        <button id="calculateRectangleButton" class="animated-button">Розрахувати площу</button>
+        
+        <div id="rectangleAreaResult" class="result"></div>
+
+        <!-- Блок для формули з MathML, центрований між кнопками -->
+        <div class="formula">
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                <mi>S</mi>
+                <mo>=</mo>
+                <mi>a</mi>
+                <mo>&#8290;</mo>
+                <mi>b</mi>
+            </math>
+        </div>
+        
+        <button onclick="window.history.back()" class="animated-button">Назад</button> <!-- Кнопка повернення на головну сторінку -->
+    </div>
+
+    <script>
+        const lengthField = document.getElementById("lengthField");
+        const widthField = document.getElementById("widthField");
+        const lengthUnit = document.getElementById("lengthUnit");
+        const widthUnit = document.getElementById("widthUnit");
+        const areaUnit = document.getElementById("areaUnit");
+        const calculateRectangleButton = document.getElementById("calculateRectangleButton");
+        const rectangleAreaResult = document.getElementById("rectangleAreaResult");
+
+        calculateRectangleButton.addEventListener("click", function() {
+            const length = parseFloat(lengthField.value);
+            const width = parseFloat(widthField.value);
+            const lengthUnitValue = lengthUnit.value;
+            const widthUnitValue = widthUnit.value;
+            const areaUnitValue = areaUnit.value;
+
+            if (!isNaN(length) && length > 0 && !isNaN(width) && width > 0) {
+                let lengthInCm = convertToCm(length, lengthUnitValue);
+                let widthInCm = convertToCm(width, widthUnitValue);
+                
+                let areaInCm2 = lengthInCm * widthInCm; // Площа у см²
+                
+                let area = convertArea(areaInCm2, areaUnitValue); // Конвертуємо площу до обраних одиниць
+                
+                rectangleAreaResult.innerHTML = `Площа прямокутника: ${area} ${areaUnitValue}²`;
+                rectangleAreaResult.classList.add('fade-in'); // Додати клас для анімації
+            } else {
+                rectangleAreaResult.innerHTML = "Будь ласка, введіть правильні значення.";
+                rectangleAreaResult.classList.add('fade-in'); // Додати клас для анімації
+            }
+        });
+
+        function convertToCm(value, unit) {
+            switch (unit) {
+                case "mm":
+                    return value / 10; // 1 мм = 0.1 см
+                case "m":
+                    return value * 100; // 1 м = 100 см
+                case "cm":
+                default:
+                    return value; // Вже у сантиметрах
+            }
+        }
+
+        function convertArea(areaInCm2, unit) {
+            switch (unit) {
+                case "mm":
+                    return areaInCm2 * 100; // 1 см² = 100 мм²
+                case "m":
+                    return areaInCm2 / 10000; // 1 м² = 10000 см²
+                case "cm":
+                default:
+                    return areaInCm2; // Вже у см²
+            }
+        }
+    </script>
+</body>
+</html>

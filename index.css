@@ -1,0 +1,55 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Висота вікна перегляду */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #a4cc9f, #2575fc); /* Градієнтний фон */
+    animation: fadeIn 1s; /* Анімація появи сторінки */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    transition: transform 0.5s; /* Анімація для заголовка */
+}
+
+h1:hover {
+    transform: scale(1.05); /* Збільшення заголовка при наведенні */
+}
+
+select, button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s; /* Анімація для кнопок і списків */
+    border-radius: 5px; /* Закруглення країв для кнопки */
+}
+
+select:hover, button:hover {
+    background-color: #8cb48d; /* Зелений фон при наведенні */
+    transform: scale(1.05); /* Збільшення елементів при наведенні */
+}
+
+button {
+    cursor: pointer;
+    background-color: #28a745; /* Зелений фон */
+    color: rgb(0, 0, 0); /* текст */
+    border: none;
+
+    border-radius: 5px; /* Закруглення країв для кнопки */
+}
+
+button:hover {
+    background-color: #218838; /* Темніший зелений фон при наведенні */
+}

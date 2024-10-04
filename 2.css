@@ -1,0 +1,90 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Висота вікна перегляду */
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #a4cc9f, #2575fc); /* Градієнтний фон */
+    color: rgb(15, 15, 15); /* Текст */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Прозорий фон */
+    border-radius: 15px; /* Закруглені кути */
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Тінь */
+    text-align: center;
+    backdrop-filter: blur(10px); /* Розмивання фону */
+    animation: fadeIn 1s; /* Анімація появи */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5rem; /* Збільшений розмір шрифту заголовка */
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column; /* Вертикальне вирівнювання елементів */
+    margin-bottom: 15px;
+}
+
+input, select {
+    padding: 10px;
+    margin: 5px 0; /* Вирівнювання знизу */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px; /* Закруглені кути для полів */
+    transition: 0.3s; /* Плавний перехід */
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Тінь при фокусі */
+}
+
+.animated-button {
+    cursor: pointer;
+    background-color: #4CAF50; /* Зелений фон */
+    color: rgb(255, 255, 255); /* Білий текст */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    transition: transform 0.3s, background-color 0.3s; /* Анімації для кнопок */
+    margin: 5px;
+    font-size: 16px; /* Розмір шрифту для кнопок */
+}
+
+.animated-button:hover {
+    background-color: #45a049; /* Темніший зелений фон при наведенні */
+    transform: scale(1.05); /* Збільшення кнопки при наведенні */
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px; /* Розмір шрифту для результату */
+    text-align: center; /* Центрування тексту результату */
+    opacity: 0; /* Початкова непрозорість для анімації */
+    transition: opacity 0.5s ease-in-out; /* Плавна анімація зміни непрозорості */
+}
+
+.fade-in {
+    opacity: 1; /* Змінюємо на видимість */
+}
+
+.formula {
+    margin: 20px 0;
+    font-size: 20px; /* Розмір шрифту для формули */
+    color: #000000; /* Текст для формули */
+    text-align: center; /* Центрування формули */
+}

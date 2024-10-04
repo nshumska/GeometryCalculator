@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор площі</title>
+    <link rel="stylesheet" href="index.css"> <!-- Підключення CSS файлу -->
+</head>
+<body>
+    <h1>Виберіть фігуру для розрахунку площі</h1>
+    <select id="shapeSelector">
+        <option value="">Оберіть фігуру</option>
+        <option value="1.html">Коло</option>
+        <option value="2.html">Прямокутник</option>
+    </select>
+    <button id="chooseButton">Обрати</button>
+
+    <script>
+        const chooseButton = document.getElementById("chooseButton");
+        const shapeSelector = document.getElementById("shapeSelector");
+
+        chooseButton.addEventListener("click", function() {
+            const selectedShape = shapeSelector.value;
+            if (selectedShape) {
+                window.location.href = selectedShape; // Перехід на сторінку калькулятора вибраної фігури
+            } else {
+                alert("Будь ласка, оберіть фігуру.");
+            }
+        });
+    </script>
+</body>
+</html>
